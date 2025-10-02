@@ -1,9 +1,9 @@
 import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
-import { getAllContacts, getContactsById } from './services/contacts';
+import { getAllContacts, getContactsById } from './services/contacts.js';
 
-const PORT = Number(process.env.PORT);
+const PORT = Number(process.env.PORT) || 3000;
 
 export const setupServer = () => {
   const app = express();
@@ -19,7 +19,6 @@ export const setupServer = () => {
     }),
   );
 
- // app.use(express.json());
 
  app.get('/contacts', async (req, res) => {
     const contacts = await getAllContacts();
@@ -31,7 +30,7 @@ res.status(200).json({
 
  }); 
 
- app.get('/contact/:contactId', async (req,res) => {
+ app.get('/contacts/:contactId', async (req,res) => {
     const {contactId} = req.params;
 const contact = await getContactsById(contactId);
 
@@ -44,8 +43,8 @@ if(!contact) {
 
 res.status(200).json({
 	status: 200,
-	message: "Successfully found contact with id {contactId}!",
-	data: contact
+	message: `Successfully found contact with id ${contactId}!`,
+	data: contact,
  })
  })
 
