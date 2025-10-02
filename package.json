@@ -6,8 +6,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint src/**/*.js",
-    "start": "node ./src/server.js",
-    "dev": "nodemon src/server.js"
+    "start": "node ./src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "Yuliia Mykytenko <mykytenko.julia@gmail.com>",
@@ -21,7 +21,9 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "mongoose": "^8.19.0",
     "pino-http": "^10.5.0"
   }
 }
