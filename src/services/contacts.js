@@ -15,15 +15,12 @@ export const createContact = async (payload) => {
   return contact;
 };
 
-export const patchContact = async (contactId, payload) => {
-  const result = await ContactsCollection.findByIdAndUpdate(
-    contactId,
-    payload,
-    {
-      new: true,
-      runValidators: true,
-    },
-  );
-
-  return result;
+export const updateContact = async (contactId, payload) => {
+  return ContactsCollection.findByIdAndUpdate(contactId, payload, {
+    new: true,
+  });
 };
+
+export const deleteContact = async (contactId) => {
+    return ContactsCollection.findByIdAndDelete(contactId);
+}
