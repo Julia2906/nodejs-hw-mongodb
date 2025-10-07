@@ -5,6 +5,7 @@ import {
   updateContact,
   deleteContact
 } from '../services/contacts.js';
+
 import createHttpError from 'http-errors';
 
 export const getAllContactsController = async (req, res) => {
@@ -41,7 +42,7 @@ export const createContactController = async (req, res) => {
   });
 };
 
-export const updateContactController = async (req, res) => {
+export const updateContactController = async (req, res, next) => {
   const { contactId } = req.params;
   const updatedContact = await updateContact(contactId, req.body);
 
@@ -57,7 +58,7 @@ export const updateContactController = async (req, res) => {
   });
 };
 
-export const deleteContactController = async (req, res) => {
+export const deleteContactController = async (req, res, next) => {
 
     const {contactId} = req.params;
     const contact = await deleteContact(contactId);

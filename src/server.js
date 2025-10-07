@@ -4,7 +4,7 @@ import cors from 'cors';
 
 import ContactsRouter from './routers/contacts.js';
 
-import { errorHandler } from './middlewares/errorHandler,js';
+import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHadler.js';
 
 const PORT = Number(process.env.PORT) || 3000;
@@ -25,10 +25,12 @@ export const setupServer = () => {
   app.use(express.json())
 
   app.use('/contacts', ContactsRouter);
+  
+  app.use(notFoundHandler);
 
   app.use(errorHandler);
 
-  app.use(notFoundHandler);
+
 
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
