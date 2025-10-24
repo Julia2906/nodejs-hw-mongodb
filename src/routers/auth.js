@@ -2,11 +2,12 @@ import { Router } from "express";
 
 import { registerUserController, loginUserController, logoutUserController,refreshUserSessionController } from "../controllers/auth.js";
 
-import { registerUserSchema, loginUserSchema, lo } from "../validation/auth.js";
+import { registerUserSchema, loginUserSchema } from "../validation/auth.js";
 
 import { ctrlWrapper } from "../utils/ctrlWrapper.js";
 
 import { validateBody } from "../middlewares/validateBody.js";
+
 
 const router = Router();
 

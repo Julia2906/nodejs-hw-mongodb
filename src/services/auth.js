@@ -5,7 +5,7 @@ import { randomBytes } from 'crypto';
 import { FIFTEEN_MINUTES, MONTH } from '../constants/index.js';
 
 import { UsersCollection } from '../db/models/user.js';
-import { SessionsCOllection } from '../db/models/session.js';
+import { SessionsCollection } from '../db/models/session.js';
 
 export const registerUser = async (payload) => {
   const user = await UsersCollection.findOne({ email: payload.email });
@@ -80,9 +80,9 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
 
   const newSession = createSession();
 
-  await SessionsCOllection.deleteOne({ _id: sessionId, refreshToken });
+  await SessionsCollection.deleteOne({ _id: sessionId, refreshToken });
 
-  return SessionsCOllection.create({
+  return SessionsCollection.create({
     userId: session.userId,
     ...newSession,
   });

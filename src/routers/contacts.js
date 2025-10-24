@@ -14,7 +14,13 @@ import { validateBody } from "../middlewares/validateBody.js";
 import { createContactSchema, updateContactSchema } from '../validation/contacts.js';
 import { isValidId } from '../middlewares/isValidId.js';
 
+import { authenticate } from '../middlewares/authenticate.js';
+
 const router = Router();
+
+router.use(authenticate);
+
+router.get('/', ctrlWrapper(getStudentsController));
 
 router.get('/', ctrlWrapper(getAllContactsController));
 
@@ -25,5 +31,8 @@ router.post('/', validateBody(createContactSchema), ctrlWrapper(createContactCon
 router.patch('/:contactId',isValidId, validateBody(updateContactSchema), ctrlWrapper(updateContactController));
 
 router.delete('/:contactId',isValidId, ctrlWrapper(deleteContactController));
+
+router.use(authenticate);
+
 
 export default router;

@@ -26,4 +26,4 @@ const sessionSchema = new Schema({
     versionKey: false,
 });
 
-export const SessionsCOllection = model('sessions', sessionSchema);
+export const SessionsCollection = model('sessions', sessionSchema);
