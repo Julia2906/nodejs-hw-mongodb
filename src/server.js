@@ -3,9 +3,7 @@ import pino from 'pino-http';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
-import contactsRouter from './routers/contacts.js';
-
-import authRouter from './auth.js';
+import routes from './routers/index.js';
 
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHadler.js';
@@ -25,19 +23,15 @@ export const setupServer = () => {
     }),
   );
 
-  app.use(express.json())
+  app.use(express.json());
 
   app.use(cookieParser());
 
-  app.use('/contacts', contactsRouter);
+  app.use(routes);
 
-  app.use('/auth', authRouter)
-  
   app.use(notFoundHandler);
 
   app.use(errorHandler);
-
-
 
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
