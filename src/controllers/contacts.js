@@ -27,6 +27,7 @@ export const getAllContactsController = async (req, res) => {
     sortOrder,
     sortBy,
     filter,
+    userId: req.user.id,
   });
   res.status(200).json({
     status: 200,
@@ -40,8 +41,14 @@ export const getContactByIdController = async (req, res, next) => {
   const contact = await getContactsById(contactId);
 
   if (!contact) {
-    throw createHttpError(404, 'Contact not found');
+    throw new createHttpError(404, 'Contact not found');
   }
+
+  if (contact.userId.toString() !== req.user.id.toString()) {
+    throw new createHttpError(404, 'Contact not found');
+  }
+
+
 
   res.status(200).json({
     status: 200,
