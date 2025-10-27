@@ -52,12 +52,12 @@ export const createContact = async (payload) => {
   return contact;
 };
 
-export const updateContact = async (contactId, payload) => {
-  return ContactsCollection.findByIdAndUpdate(contactId, payload, {
+export const updateContact = async (contactId, payload, userId) => {
+  return ContactsCollection.findOneAndUpdate({_id: contactId, userId}, payload, {
     new: true,
   });
 };
 
-export const deleteContact = async (contactId) => {
-  return ContactsCollection.findByIdAndDelete(contactId);
+export const deleteContact = async (contactId, userId) => {
+  return ContactsCollection.findOneAndDelete({_id: contactId, userId});
 };
